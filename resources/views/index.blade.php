@@ -317,7 +317,7 @@
                             </div>
                         </div>
 
-                        <img class="nhato" src="" alt="">
+                        <img class="nhato" src="{{ asset('storage/' . $product->photo) }}" alt="">
                     </div>
                 </div>
             </div>

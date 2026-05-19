@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'name' => 'Nguyễn Văn A',
-                'email' => 'owner1@gmail.com',
+                'name' => 'Nguyễn Anh Minh',
+                'email' => 'AnhMinh@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'owner',
                 'avatar' => 'owner1.jpg',
@@ -39,8 +39,8 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'name' => 'Trần Thị B',
-                'email' => 'owner2@gmail.com',
+                'name' => 'Phan Trần Nguyên Khang',
+                'email' => 'KhangPhan@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'owner',
                 'avatar' => 'owner2.jpg',
@@ -52,8 +52,8 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'name' => 'Lê Văn C',
-                'email' => 'tenant1@gmail.com',
+                'name' => 'Nguyễn Văn Tủng',
+                'email' => 'TungNguyen@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'tenant',
                 'avatar' => 'tenant1.jpg',
