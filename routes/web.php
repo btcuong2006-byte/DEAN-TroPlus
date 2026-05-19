@@ -2,15 +2,29 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-use App\Models\Product; 
+use App\Models\Product;
+use App\Models\Comment;
 
 Route::get('/', function () {
-    $products = Product::where('status', 'available')  // ✅ chỉ lấy phòng còn trống
-                        ->orderBy('favorite_count', 'desc')  // ✅ sắp xếp theo phổ biến
-                        ->take(9)  // ✅ lấy 9 phòng (hoặc 7-10 tùy bạn)
+    $products = Product::where('status', 'available')
+                        ->orderBy('favorite_count', 'desc')
+                        ->take(9)
                         ->get();
+
     $product = $products->first();
-    return view('index', compact('products','product'));
+
+    $comments = Comment::with('user')
+                        ->latest()
+                        ->take(6)
+                        ->get();
+
+    $availableCount = Product::where('status', 'available')->count();
+
+    $cityCount = Product::where('status', 'available')
+                        ->distinct('city')
+                        ->count('city');
+
+    return view('index', compact('products', 'product', 'comments', 'cityCount', 'availableCount'));
 });
 
 Route::resource('products', ProductController::class);

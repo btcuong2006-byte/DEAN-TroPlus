@@ -14,7 +14,11 @@ class CommentSeeder extends Seeder
             [
                 'user_id' => 4,
                 'product_id' => 1,
-                'content' => 'Phòng đẹp và sạch sẽ',
+                'content' => 'Phòng đẹp và sạch sẽ áhdjlahsdhasjldh
+                ádasdasdads
+                ádasdasdasdasda
+                ádasdasd',
+                 'rating' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -23,6 +27,7 @@ class CommentSeeder extends Seeder
                 'user_id' => 4,
                 'product_id' => 2,
                 'content' => 'Nhà rộng thật',
+                   'rating' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

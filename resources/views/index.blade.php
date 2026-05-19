@@ -224,6 +224,14 @@
             transform: translateY(-20px);
             box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
         }
+
+        .map {
+            margin-top: 150px;
+        }
+
+        .map-size {
+            width: 1000px;
+        }
     </style>
 </head>
 
@@ -389,7 +397,7 @@
                 <h1><b>Phòng trọ nổi bật</b></h1>
                 <p style="color: #6c757d;">Những phòng trọ được đánh giá cao và đang còn trống</p>
 
-                <div class="container mt-4">
+                <div class="container mt-4 mb-5">
                     <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start ">
                         @foreach($products as $product)
                         <div class="col ">
@@ -446,7 +454,7 @@
                                                 {{ strtoupper(substr($product->user->name, 0, 1)) }}
                                             </div>
                                             @endif
-                                            <a style="text-decoration: none; color:black;" href="#"class="text-muted" style="font-size: 0.85rem;">{{ $product->user->name }}</a>
+                                            <a style="text-decoration: none; color:black;" href="#" class="text-muted" style="font-size: 0.85rem;">{{ $product->user->name }}</a>
                                         </div>
 
                                         <div class="d-flex align-items-center gap-1 text-danger">
@@ -461,10 +469,92 @@
                         @endforeach
                     </div>
                 </div>
+
+                <!-- map -->
+                <div class="map text-center">
+                    <h1><b>phòng trọ trên bản đồ</b></h1>
+                    <p style="color: #6c757d;">Xem vị trí các phòng trọ trên bản đồ để chọn chỗ ở thuận tiện nhất cho bạn</p>
+
+                    <div class="box-map" style="position: relative; display: inline-block; width: 100%; margin-top: 50px;">
+
+                        <img class="map-size"
+                            src="{{ asset('storage/' . optional($product)->photo) }}"
+                            alt=""
+                            style="width: 100%; border-radius: 20px; display: block;">
+
+                        {{-- Box nằm đè lên ảnh --}}
+                        <div class="d-flex align-items-center gap-3 bg-white px-3 rounded-4 shadow"
+                            style="position: absolute; bottom: 16px; left: 16px; z-index: 10;">
+                            <ul class="stats-list">
+                                <li>
+                                    <p class="stats-number">{{ $availableCount }}</p>
+                                    <p class="end-number">Phòng Trống</p>
+                                </li>
+                                <li>
+                                    <p class="stats-number">{{ $cityCount }}</p>
+                                    <p class="end-number">Thành Phố</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- đánh giá nổi bật -->
+
+              <div style="margin-top: 150px;" class="comment text-center">
+    <h1><b>Khách hàng nói gì về chúng tôi</b></h1>
+    <p style="color: #6c757d;">Những đánh giá thực tế từ người đã tìm được phòng trọ ưng ý</p>
+
+    <div class="container mt-4 mb-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start">
+            @foreach($comments as $comment)
+            <div class="col">
+                <div class="card rounded-4 p-2">
+                    
+                   
+                    <div class="card-body text-start">
+                         {{-- Rating --}}
+                            <div class="d-flex align-items-center gap-1 text-warning">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= $comment->rating)
+                                        <i class="bi bi-star-fill"></i>
+                                    @else
+                                        <i class="bi bi-star"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                             {{-- Nội dung comment --}}
+                        <p class="mb-3">{{ $comment->content }}</p>
+
+                        {{-- Người dùng --}}
+                        <div class="d-flex align-items-center justify-content-between border-top pt-2">
+                            <div class="d-flex align-items-center gap-2">
+                                @if($comment->user->avatar)
+                                    <img src="{{ asset('storage/' . $comment->user->avatar) }}"
+                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
+                                        alt="{{ $comment->user->name }}">
+                                @else
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
+                                        {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                                <span style="font-size: 0.85rem;">{{ $comment->user->name }}</span>
+                            </div>
+
+                           
+                        </div>
+                    </div>
+                </div>
             </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 
     </header>
+    <footer>
 
+    </footer>
 </body>
 
 </html>
