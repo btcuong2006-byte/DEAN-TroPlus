@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'name' => 'Nguyễn Văn Tủng',
+                'name' => 'Nguyễn Việt Tủng',
                 'email' => 'TungNguyen@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'tenant',

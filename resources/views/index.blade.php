@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         body {
             background-color: rgb(249, 251, 255);
@@ -165,7 +166,7 @@
             height: 120px;
             border-radius: 10px;
             display: flex;
-        
+
             align-items: center;
             /* ✅ căn giữa theo chiều dọc */
             justify-content: center;
@@ -204,6 +205,24 @@
             align-items: center;
             justify-content: center;
             height: 100px;
+        }
+
+        .show {
+            margin-top: 100px;
+        }
+
+        .card {
+            border-radius: 25px !important;
+            overflow: hidden;
+            /* ✅ ảnh không tràn ra ngoài bo tròn */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* ✅ mượt mà */
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -317,56 +336,132 @@
                             </div>
                         </div>
 
-                        <img class="nhato" src="{{ asset('storage/' . $product->photo) }}" alt="">
+                        <img class="nhato" src="{{ asset('storage/' .optional($product)->photo) }}" alt="">
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Thanh tìm kiếm -->
-        <div class="banner">
-            <div class="find">
-                <div class="sleclect-group">
-                    <label for="ThanhPho">Thành Phố
-                        <select name="ThanhPho" id="ThanhPho">
-                            <option value="ThanhPho">Tất Cả Thành Phố </option>
-                            <option value="ThanhPho">Hồ Chí minh</option>
-                            <option value="ThanhPho">Hà Nội</option>
-                            <option value="ThanhPho">Thanh Hoá</option>
-                            <option value="ThanhPho">Nam Định</option>
-                        </select></label>
-                </div>
-                <div class="sleclect-group">
-                    <label for="Quan/Huyen">Quận / Huyện
-                        <select name="Quan/Huyen" id="">
-                            <option value="Quan/Huyen">Tất Cả Quận/Huyện</option>
 
-                        </select>
-                    </label>
-                </div>
-                <div class="sleclect-group">
-                    <label for="LoaiPhong">Loại Phòng
-                        <select name="LoaiPhong" id="">
-                            <option value="LoaiPhong">Tất Cả Loại Phòng </option>
+            <!-- Thanh tìm kiếm -->
+            <div class="banner">
+                <div class="find">
+                    <div class="sleclect-group">
+                        <label for="ThanhPho">Thành Phố
+                            <select name="ThanhPho" id="ThanhPho">
+                                <option value="ThanhPho">Tất Cả Thành Phố </option>
+                                <option value="ThanhPho">Hồ Chí minh</option>
+                                <option value="ThanhPho">Hà Nội</option>
+                                <option value="ThanhPho">Thanh Hoá</option>
+                                <option value="ThanhPho">Nam Định</option>
+                            </select></label>
+                    </div>
+                    <div class="sleclect-group">
+                        <label for="Quan/Huyen">Quận / Huyện
+                            <select name="Quan/Huyen" id="">
+                                <option value="Quan/Huyen">Tất Cả Quận/Huyện</option>
 
-                        </select>
-                    </label>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="sleclect-group">
+                        <label for="LoaiPhong">Loại Phòng
+                            <select name="LoaiPhong" id="">
+                                <option value="LoaiPhong">Tất Cả Loại Phòng </option>
+
+                            </select>
+                        </label>
+                    </div>
+                    <div class="sleclect-group">
+                        <label for="KhoangGia">Khoảng Giá
+                            <select name="KhoangGia" id="">
+                                <option value="KhoangGia">Tất Cả Giá </option>
+                            </select>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg> tìm kiếm</button>
                 </div>
-                <div class="sleclect-group">
-                    <label for="KhoangGia">Khoảng Giá
-                        <select name="KhoangGia" id="">
-                            <option value="KhoangGia">Tất Cả Giá </option>
-                        </select>
-                    </label>
-                </div>
-                <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg> tìm kiếm</button>
             </div>
-        </div>
 
-        <!-- Card -->
-    
+            <!-- Card -->
 
+            <div class="show">
+                <h1><b>Phòng trọ nổi bật</b></h1>
+                <p style="color: #6c757d;">Những phòng trọ được đánh giá cao và đang còn trống</p>
+
+                <div class="container mt-4">
+                    <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start ">
+                        @foreach($products as $product)
+                        <div class="col ">
+                            <div class="card">
+                                <img src="{{ asset('storage/' . $product->photo) }}"
+                                    class="card-img-top"
+                                    style="height: 200px; object-fit: cover;"
+                                    alt="{{ $product->name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a style="text-decoration: none; color:black;" href="">
+                                            {{ $product->name }}
+                                        </a>
+                                    </h5>
+                                    <p class="card-text text-muted">
+                                        <small> {{ $product->address }}</small>
+                                    </p>
+                                    <p class="card-text text-success fw-bold">
+                                        {{ number_format($product->price) }} đ/tháng
+                                    </p>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        @foreach(explode(',', $product->description) as $item)
+                                        <span class="badge bg-light text-dark border">
+                                            @php $item = trim($item); @endphp
+                                            @if(str_contains($item, 'wifi'))
+                                            <i class="bi bi-wifi"></i>
+                                            @elseif(str_contains($item, 'máy lạnh'))
+                                            <i class="bi bi-snow"></i>
+                                            @elseif(str_contains($item, 'bảo vệ'))
+                                            <i class="bi bi-shield-check"></i>
+                                            @elseif(str_contains($item, 'gác'))
+                                            <i class="bi bi-house"></i>
+                                            @elseif(str_contains($item, 'chợ'))
+                                            <i class="bi bi-bag"></i>
+                                            @else
+                                            <i class="bi bi-check-circle"></i>
+                                            @endif
+                                            {{ $item }}
+                                        </span>
+                                        @endforeach {{-- ✅ endforeach description --}}
+                                    </div>
+
+                                    <!-- chủ trọ -->
+                                    <div class="mt-3 d-flex align-items-center justify-content-between border-top pt-2">
+
+                                        {{-- Chủ trọ --}}
+                                        <div class="d-flex align-items-center gap-2">
+                                            @if($product->user->avatar)
+                                            <img src="{{ asset('storage/' . $product->user->avatar) }}"
+                                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
+                                                alt="{{ $product->user->name }}">
+                                            @else
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
+                                                {{ strtoupper(substr($product->user->name, 0, 1)) }}
+                                            </div>
+                                            @endif
+                                            <a style="text-decoration: none; color:black;" href="#"class="text-muted" style="font-size: 0.85rem;">{{ $product->user->name }}</a>
+                                        </div>
+
+                                        <div class="d-flex align-items-center gap-1 text-danger">
+                                            <i class="bi bi-heart-fill"></i>
+                                            <span style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
     </header>
 

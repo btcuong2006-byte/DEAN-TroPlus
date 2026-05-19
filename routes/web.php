@@ -5,9 +5,12 @@ use App\Http\Controllers\ProductController;
 use App\Models\Product; 
 
 Route::get('/', function () {
-    $products = Product::latest()->get(); // ✅ nhiều sản phẩm
-    $product = $products->first();        // ✅ 1 sản phẩm cho ảnh
-    return view('index', compact('products', 'product'));
+    $products = Product::where('status', 'available')  // ✅ chỉ lấy phòng còn trống
+                        ->orderBy('favorite_count', 'desc')  // ✅ sắp xếp theo phổ biến
+                        ->take(9)  // ✅ lấy 9 phòng (hoặc 7-10 tùy bạn)
+                        ->get();
+    $product = $products->first();
+    return view('index', compact('products','product'));
 });
 
 Route::resource('products', ProductController::class);
