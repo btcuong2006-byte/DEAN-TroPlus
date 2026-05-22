@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     DB::table('comments')->truncate();
     DB::table('products')->truncate();
     DB::table('users')->truncate();
+    DB::table('settings')->truncate();
 
     // ✅ Bật lại
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -33,6 +34,8 @@ class DatabaseSeeder extends Seeder
             FavoriteSeeder::class,
 
             TenantReviewSeeder::class,
+
+             SettingSeeder::class,
         ]);
     }
 }

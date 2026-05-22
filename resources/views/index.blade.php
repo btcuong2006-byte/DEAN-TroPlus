@@ -469,92 +469,169 @@
                         @endforeach
                     </div>
                 </div>
+            </div>
+            <!-- map -->
+            <div class="map text-center">
+                <h1><b>phòng trọ trên bản đồ</b></h1>
+                <p style="color: #6c757d;">Xem vị trí các phòng trọ trên bản đồ để chọn chỗ ở thuận tiện nhất cho bạn</p>
 
-                <!-- map -->
-                <div class="map text-center">
-                    <h1><b>phòng trọ trên bản đồ</b></h1>
-                    <p style="color: #6c757d;">Xem vị trí các phòng trọ trên bản đồ để chọn chỗ ở thuận tiện nhất cho bạn</p>
+                <div class="box-map" style="position: relative; display: inline-block; width: 100%; margin-top: 50px;">
 
-                    <div class="box-map" style="position: relative; display: inline-block; width: 100%; margin-top: 50px;">
+                    <img class="map-size"
+                        src="{{ asset('storage/' . optional($product)->photo) }}"
+                        alt=""
+                        style="width: 100%; border-radius: 20px; display: block;">
 
-                        <img class="map-size"
-                            src="{{ asset('storage/' . optional($product)->photo) }}"
-                            alt=""
-                            style="width: 100%; border-radius: 20px; display: block;">
-
-                        {{-- Box nằm đè lên ảnh --}}
-                        <div class="d-flex align-items-center gap-3 bg-white px-3 rounded-4 shadow"
-                            style="position: absolute; bottom: 16px; left: 16px; z-index: 10;">
-                            <ul class="stats-list">
-                                <li>
-                                    <p class="stats-number">{{ $availableCount }}</p>
-                                    <p class="end-number">Phòng Trống</p>
-                                </li>
-                                <li>
-                                    <p class="stats-number">{{ $cityCount }}</p>
-                                    <p class="end-number">Thành Phố</p>
-                                </li>
-                            </ul>
-                        </div>
-
+                    {{-- Box nằm đè lên ảnh --}}
+                    <div class="d-flex align-items-center gap-3 bg-white px-3 rounded-4 shadow"
+                        style="position: absolute; bottom: 16px; left: 16px; z-index: 10;">
+                        <ul class="stats-list">
+                            <li>
+                                <p class="stats-number">{{ $availableCount }}</p>
+                                <p class="end-number">Phòng Trống</p>
+                            </li>
+                            <li>
+                                <p class="stats-number">{{ $cityCount }}</p>
+                                <p class="end-number">Thành Phố</p>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
-                <!-- đánh giá nổi bật -->
+            </div>
+            <!-- đánh giá nổi bật -->
 
-              <div style="margin-top: 150px;" class="comment text-center">
-    <h1><b>Khách hàng nói gì về chúng tôi</b></h1>
-    <p style="color: #6c757d;">Những đánh giá thực tế từ người đã tìm được phòng trọ ưng ý</p>
+            <div style="margin-top: 150px;" class="comment text-center">
+                <h1><b>Khách hàng nói gì về chúng tôi</b></h1>
+                <p style="color: #6c757d;">Những đánh giá thực tế từ người đã tìm được phòng trọ ưng ý</p>
 
-    <div class="container mt-4 mb-5">
-        <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start">
-            @foreach($comments as $comment)
-            <div class="col">
-                <div class="card rounded-4 p-2">
-                    
-                   
-                    <div class="card-body text-start">
-                         {{-- Rating --}}
-                            <div class="d-flex align-items-center gap-1 text-warning">
-                                @for($i = 1; $i <= 5; $i++)
-                                    @if($i <= $comment->rating)
-                                        <i class="bi bi-star-fill"></i>
-                                    @else
-                                        <i class="bi bi-star"></i>
-                                    @endif
-                                @endfor
-                            </div>
-                             {{-- Nội dung comment --}}
-                        <p class="mb-3">{{ $comment->content }}</p>
+                <div class="container mt-4 mb-5">
+                    <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start">
+                        @foreach($comments as $comment)
+                        <div class="col">
+                            <div class="card rounded-4 p-2">
 
-                        {{-- Người dùng --}}
-                        <div class="d-flex align-items-center justify-content-between border-top pt-2">
-                            <div class="d-flex align-items-center gap-2">
-                                @if($comment->user->avatar)
-                                    <img src="{{ asset('storage/' . $comment->user->avatar) }}"
-                                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
-                                        alt="{{ $comment->user->name }}">
-                                @else
-                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
-                                        {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+
+                                <div class="card-body text-start">
+                                    {{-- Rating --}}
+                                    <div class="d-flex align-items-center gap-1 text-warning">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <=$comment->rating)
+                                            <i class="bi bi-star-fill"></i>
+                                            @else
+                                            <i class="bi bi-star"></i>
+                                            @endif
+                                            @endfor
                                     </div>
-                                @endif
-                                <span style="font-size: 0.85rem;">{{ $comment->user->name }}</span>
-                            </div>
+                                    {{-- Nội dung comment --}}
+                                    <p class="mb-3">{{ $comment->content }}</p>
 
-                           
+                                    {{-- Người dùng --}}
+                                    <div class="d-flex align-items-center justify-content-between border-top pt-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            @if($comment->user->avatar)
+                                            <img src="{{ asset('storage/' . $comment->user->avatar) }}"
+                                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
+                                                alt="{{ $comment->user->name }}">
+                                            @else
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
+                                                {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+                                            </div>
+                                            @endif
+                                            <span style="font-size: 0.85rem;">{{ $comment->user->name }}</span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
-    </div>
-</div>
 
+            <!--temper  -->
+
+            <div class="box-map" style="position: relative; width: 100%; max-width: 1000px; margin: 50px auto 0; color: #dcdfe1;">
+
+                <img class="map-size"
+                    src="{{ asset($settings['banner_image']) }}"
+                    alt=""
+                    style="width: 100%; border-radius: 20px; display: block; height: 300px; object-fit: cover;">
+
+                {{-- Lớp tối đè lên ảnh --}}
+                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 20px; z-index: 5;"></div>
+
+                {{-- Nội dung căn giữa ảnh --}}
+                <div class="d-flex flex-column align-items-center justify-content-center text-center"
+                    style="position: absolute; inset: 0; z-index: 10; padding: 20px;">
+
+                    <h1 class="fw-bold mb-2">Bạn có phòng cho thuê?</h1>
+                    <p class="mb-4">Đăng tin ngay để tiếp cận hàng ngàn khách hàng tiềm năng. <br>
+                        Đơn giản, nhanh gọn và hoàn toàn miễn phí.</p>
+
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-light">Đăng phòng ngay</button>
+                        <button class="btn btn-outline-light">Tìm hiểu thêm</button>
+                    </div>
+                </div>
+            </div>
     </header>
-    <footer>
+   <footer style="margin-top: 100px; width: 100%; background-color: rgb(30, 41, 59); color: rgb(194, 194, 194);">
+    <div class=" pt-4 pb-4 px-5">
+        <div class="row gx-5 pt-5">
 
-    </footer>
+            <!-- Logo & Mô tả -->
+            <div class="col-md-3 mb-4">
+                <a class="navbar-brand fs-4" href="#">TroPlus</a>
+                <p class="mt-3 text-secondary" style="font-size: 0.9em;">
+                    Nền tảng tìm kiếm và cho thuê phòng trọ hàng đầu Việt Nam. <br>
+                    Kết nối người thuê và chủ trọ một cách nhanh chóng, minh bạch.
+                </p>
+            </div>
+
+            <!-- Liên kết nhanh -->
+            <div class="col-md-3 mb-4">
+                <h6 class=" mb-3">LIÊN KẾT NHANH</h6>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Trang chủ</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Tìm phòng</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Bản đồ phòng trọ</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Phòng nổi bật</a>
+            </div>
+
+            <!-- Dành cho chủ trọ -->
+            <div class="col-md-3 mb-4">
+                <h6 class=" mb-3">DÀNH CHO CHỦ TRỌ</h6>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Đăng phòng cho thuê</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Quản lý đăng bài</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Hướng dẫn sử dụng</a>
+                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Chính sách và quy định</a>
+            </div>
+
+            <!-- Liên hệ -->
+            <div class="col-md-3 mb-4">
+                <h6 class=" mb-3">LIÊN HỆ</h6>
+                <p class="text-secondary mb-2">
+                    <i class="bi bi-geo-alt me-2"></i>123 Nguyễn Anh Minh
+                </p>
+                <p class="text-secondary mb-2">
+                    <i class="bi bi-telephone me-2"></i>1900 12345
+                </p>
+                <p class="text-secondary mb-2">
+                    <i class="bi bi-envelope me-2"></i>nguyenanhminh@troplus.vn
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Đường kẻ & Copyright -->
+        <hr style="border-color: #333;">
+        <p class="text-center text-secondary mb-0" style="font-size: 0.85em;">
+            © 2026 TroPlus. All rights reserved.
+        </p>
+    </div>
+</footer>
 </body>
 
 </html>
