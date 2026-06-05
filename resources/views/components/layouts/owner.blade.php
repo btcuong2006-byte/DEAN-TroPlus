@@ -93,41 +93,45 @@
             <!-- Sidebar -->
             <div class="sidebar border-0 col-md-3 col-lg-2 p-0 d-flex flex-column justify-content-between">
                 <div>
-                    <!-- Brand -->
-                    <div class="sidebar-brand">
-                        <div class="brand-icon">
-                            <i class="bi bi-house-fill"></i>
-                        </div>
-                        TrọPlus
-                    </div>
+                   <!-- Brand → về trang chủ -->
+<div class="sidebar-brand">
+    <a href="{{ url('/') }}" style="text-decoration: none; color: white;">
+        <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon">
+                <i class="bi bi-house-fill"></i>
+            </div>
+            TrọPlus
+        </div>
+    </a>
+</div>
 
                     <!-- Nav links -->
-                    <ul class="nav flex-column mt-2">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.dashboard') ? 'active' : '' }}"
-                                href="{{ route('owner.dashboard') }}">
-                                <i class="bi bi-grid"></i> Tổng quan
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.products.create') ? 'active' : '' }}"
-                                href="{{ route('owner.products.create') }}">
-                                <i class="bi bi-plus-circle"></i> Đăng phòng
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.products*') ? 'active' : '' }}"
-                                href="{{ route('owner.products') }}">
-                                <i class="bi bi-house"></i> Phòng của tôi
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.comments*') ? 'active' : '' }}"
-                                href="{{ route('owner.comments') }}">
-                                <i class="bi bi-chat-square-text"></i> Đánh giá
-                            </a>
-                        </li>
-                    </ul>
+                   <ul class="nav flex-column mt-2">
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.dashboard') ? 'active' : '' }}"
+            href="{{ route('owner.dashboard') }}">
+            <i class="bi bi-grid"></i> Tổng quan
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.products.create') ? 'active' : '' }}"
+            href="{{ route('owner.products.create') }}">
+            <i class="bi bi-plus-circle"></i> Đăng phòng
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.products') || request()->routeIs('owner.products.edit') ? 'active' : '' }}"
+            href="{{ route('owner.products') }}">
+            <i class="bi bi-house"></i> Phòng của tôi
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('owner.comments') ? 'active' : '' }}"
+            href="{{ route('owner.comments') }}">
+            <i class="bi bi-chat-square-text"></i> Đánh giá
+        </a>
+    </li>
+</ul>
                 </div>
 
                 <!-- User info + Logout -->
@@ -141,9 +145,14 @@
                             <div class="role">Chủ trọ</div>
                         </div>
                     </div>
-                    <a class="nav-link d-flex align-items-center gap-2 text-danger mx-2 mb-3" href="#">
-                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                    </a>
+                   <a class="nav-link d-flex align-items-center gap-2 text-danger mx-2 mb-3" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
                 </div>
             </div>
 

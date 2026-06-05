@@ -117,12 +117,16 @@
             <!-- Sidebar -->
             <div class="sidebar border-0 col-md-3 col-lg-2 p-0 d-flex flex-column justify-content-between">
                 <div>
-                    <div class="sidebar-brand">
-                        <div class="brand-icon">
-                            <i class="bi bi-house-fill"></i>
-                        </div>
-                        TrọPlus
-                    </div>
+                   <div class="sidebar-brand">
+    <a href="{{ url('/') }}" style="text-decoration: none; color: white;">
+        <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon">
+                <i class="bi bi-house-fill"></i>
+            </div>
+            TrọPlus
+        </div>
+    </a>
+</div>
 
                     <ul class="nav flex-column mt-2">
                         <li class="nav-item">
@@ -169,9 +173,14 @@
                             <div class="role">Quản trị viên</div>
                         </div>
                     </div>
-                    <a class="nav-link d-flex align-items-center gap-2 text-danger mx-2 mb-3" href="#">
-                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                    </a>
+                   <a class="nav-link d-flex align-items-center gap-2 text-danger mx-2 mb-3" href="#"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
                 </div>
             </div>
 

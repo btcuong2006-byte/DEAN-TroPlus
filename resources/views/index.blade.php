@@ -1,39 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <title>TroPlus - Tìm phòng trọ nhanh chóng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
-        body {
-            background-color: rgb(249, 251, 255);
-        }
+        body { background-color: rgb(249, 251, 255); }
 
-        .nav-hover {
-            color: gray;
-        }
+        .nav-hover { color: gray; }
+        .nav-hover:hover { color: blue; }
 
-        .nav-hover:hover {
-            color: blue;
-        }
-
-        .nhato {
-            border-radius: 20px;
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-
-        .highlight {
-            color: blue;
-        }
+        .highlight { color: blue; }
 
         .stats-list {
             list-style: none;
@@ -50,30 +31,11 @@
             margin-bottom: -6px;
         }
 
-        .end-number {
-            font-size: 0.8em;
-            color: #6c757d;
-        }
+        .end-number { font-size: 0.8em; color: #6c757d; }
 
-        .a {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #1a1a2e;
-            margin: 0;
-            line-height: 1.3;
-        }
-
-        .b {
-            font-size: 0.7em;
-            color: #6c757d;
-            margin: 0;
-        }
-
-        .slogan {
-            font-size: 0.9em;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
+        .a { font-weight: 700; font-size: 1rem; color: #1a1a2e; margin: 0; line-height: 1.3; }
+        .b { font-size: 0.7em; color: #6c757d; margin: 0; }
+        .slogan { font-size: 0.9em; color: #6c757d; margin-bottom: 20px; }
 
         .badge-tag {
             border-radius: 999px;
@@ -87,61 +49,38 @@
             width: fit-content;
             padding: 6px 16px;
             pointer-events: none;
-            /* ✅ bỏ hover */
         }
 
         .box {
             padding: 12px 16px;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             position: absolute;
-            /* ✅ nằm đè lên ảnh */
             bottom: 20px;
-            /* ✅ cách đáy ảnh 20px */
             left: 20px;
-            /* ✅ cách lề trái 20px */
             right: 20px;
-
             z-index: 10;
         }
 
         @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .box-2 {
             padding: 12px 16px;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             position: absolute;
-            /* ✅ nằm đè lên ảnh */
             top: -20px;
-            /* ✅ cách đáy ảnh 20px */
-            width: auto;
-            /* ✅ cách lề trái 20px */
             right: -20px;
             z-index: 10;
             animation: bounce 2s ease-in-out infinite;
-            /* ✅ thêm dòng này */
-
         }
 
-        .img-wrapper {
-            position: relative;
-            /* ✅ làm cha cho box */
-            display: inline-block;
-            width: 100%;
-        }
+        .img-wrapper { position: relative; display: inline-block; width: 100%; }
 
         .nhato {
             border-radius: 20px;
@@ -162,102 +101,291 @@
         }
 
         .find {
-            width: 1000px;
-            height: 120px;
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
             border-radius: 10px;
             display: flex;
-
+            flex-wrap: wrap;
             align-items: center;
-            /* ✅ căn giữa theo chiều dọc */
             justify-content: center;
-            /* ✅ căn giữa theo chiều ngang */
             gap: 10px;
-            /* ✅ khoảng cách giữa các select */
-            padding: 0 30px;
+            padding: 20px 30px;
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             margin-top: 70px;
         }
 
         .find select {
             height: 40px;
             width: 180px;
-            flex-shrink: 0;
             border-radius: 7px;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 0 10px;
             border: #6c757d solid 2px;
         }
 
-        .find button {
-            height: 40px;
-            flex-shrink: 0;
-            width: 180px;
-        }
-
-        .find label {
-            color: #6c757d;
-            padding-bottom: 5px;
-        }
-
-        .banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-        }
-
-        .show {
-            margin-top: 100px;
-        }
+        .find button { height: 40px; width: 150px; }
+        .find label { color: #6c757d; font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px; }
 
         .card {
             border-radius: 25px !important;
             overflow: hidden;
-            /* ✅ ảnh không tràn ra ngoài bo tròn */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* ✅ mượt mà */
             cursor: pointer;
         }
 
         .card:hover {
             transform: translateY(-20px);
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 10px rgba(0,0,0,0.2);
         }
 
-        .map {
-            margin-top: 150px;
-        }
-
-        .map-size {
-            width: 1000px;
-        }
+        .card-title a { text-decoration: none; color: #1a1a2e; }
+        .card-title a:hover { color: #3498db; }
     </style>
 </head>
 
 <body>
+
     <!-- Nav -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-sm">
+        <div class="container-fluid px-4">
             <button class="btn btn-primary me-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
-                </svg>
+                <i class="bi bi-house"></i>
             </button>
-            <a class="navbar-brand" href="#">TroPlus</a>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <a class="navbar-brand fw-bold" href="/">TroPlus</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav mx-auto">
                     <a class="nav-link nav-hover" href="#">Trang chủ</a>
                     <a class="nav-link nav-hover" href="#">Tìm Phòng</a>
                     <a class="nav-link nav-hover" href="#">Bản Đồ</a>
                 </div>
-                <div class="d-flex gap-2">
-                    <button class="btn nav-hover">Đăng Nhập</button>
-                    <button class="btn btn-primary">Đăng Ký</button>
+
+                <div class="d-flex gap-2 align-items-center">
+                    @auth
+                        <!-- Dropdown user đã đăng nhập -->
+                        <div class="dropdown">
+                            <button class="btn d-flex align-items-center gap-2 dropdown-toggle border-0"
+                                    type="button" data-bs-toggle="dropdown">
+                                @if(auth()->user()->avatar)
+                                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}"
+                                         style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=3b82f6&color=fff"
+                                         style="width: 32px; height: 32px; border-radius: 50%;">
+                                @endif
+                                <span>{{ auth()->user()->name }}</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow rounded-4 p-2" style="min-width: 220px;">
+                                <li class="px-3 py-2">
+                                    <div class="fw-bold">{{ auth()->user()->name }}</div>
+                                    <div class="text-muted" style="font-size: 0.8rem;">{{ auth()->user()->email }}</div>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+
+                                @if(auth()->user()->role === 'admin')
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2"
+                                           href="{{ route('admin.dashboard') }}">
+                                            <i class="bi bi-grid"></i> Dashboard Admin
+                                        </a>
+                                    </li>
+                                @elseif(auth()->user()->role === 'owner')
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2"
+                                           href="{{ route('owner.dashboard') }}">
+                                            <i class="bi bi-grid"></i> Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2"
+                                           href="{{ route('owner.products.create') }}">
+                                            <i class="bi bi-plus-circle"></i> Đăng phòng
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item rounded-3 d-flex align-items-center gap-2"
+                                           href="{{ route('owner.products') }}">
+                                            <i class="bi bi-house"></i> Phòng của tôi
+                                        </a>
+                                    </li>
+                                @endif
+
+                                <li>
+                                    <a class="dropdown-item rounded-3 d-flex align-items-center gap-2" href="#">
+                                        <i class="bi bi-person"></i> Trang cá nhân
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item rounded-3 d-flex align-items-center gap-2" href="#">
+                                        <i class="bi bi-heart"></i> Phòng đã lưu
+                                    </a>
+                                </li>
+
+                                <li><hr class="dropdown-divider"></li>
+
+                                <li>
+                                    <a class="dropdown-item rounded-3 d-flex align-items-center gap-2 text-danger"
+                                       href="#"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <!-- Chưa đăng nhập -->
+                        <button class="btn btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Đăng Nhập
+                        </button>
+                        <button class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Đăng Ký
+                        </button>
+                    @endauth
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Modal Đăng nhập -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 p-2">
+                <div class="modal-header border-0">
+                    <div>
+                        <h5 class="modal-title fw-bold">Đăng nhập</h5>
+                        <p class="text-muted mb-0" style="font-size: 0.9rem;">Chào mừng bạn quay lại!</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+                                <input type="email" name="email" class="form-control border-start-0"
+                                       placeholder="Nhập địa chỉ email" value="{{ old('email') }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" name="password" class="form-control border-start-0"
+                                       placeholder="Nhập mật khẩu">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                <label class="form-check-label text-muted" for="remember">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <a href="#" class="text-primary text-decoration-none">Quên mật khẩu?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold">
+                            Đăng nhập
+                        </button>
+                        <div class="mt-3 p-3 rounded-3" style="background: #f8f9fa;">
+                            <p class="mb-1 fw-semibold" style="font-size: 0.85rem;">Tài khoản demo:</p>
+                            <p class="mb-0 text-primary" style="font-size: 0.8rem;">admin@troplus.com (Admin)</p>
+                            <p class="mb-0 text-primary" style="font-size: 0.8rem;">AnhMinh@gmail.com (Chủ trọ)</p>
+                            <p class="mb-0 text-primary" style="font-size: 0.8rem;">TungNguyen@gmail.com (Khách thuê)</p>
+                            <p class="mb-0 text-muted" style="font-size: 0.8rem;">Mật khẩu: 123456</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <p class="mb-0 text-muted">Chưa có tài khoản?
+                        <a href="#" class="text-primary fw-semibold text-decoration-none"
+                           data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Đăng ký ngay
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Đăng ký -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 p-2">
+                <div class="modal-header border-0">
+                    <div>
+                        <h5 class="modal-title fw-bold">Đăng ký</h5>
+                        <p class="text-muted mb-0" style="font-size: 0.9rem;">Tạo tài khoản mới</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Họ tên</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-person text-muted"></i></span>
+                                <input type="text" name="name" class="form-control border-start-0"
+                                       placeholder="Nhập họ tên" value="{{ old('name') }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+                                <input type="email" name="email" class="form-control border-start-0"
+                                       placeholder="Nhập địa chỉ email" value="{{ old('email') }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" name="password" class="form-control border-start-0"
+                                       placeholder="Nhập mật khẩu">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Xác nhận mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" name="password_confirmation" class="form-control border-start-0"
+                                       placeholder="Nhập lại mật khẩu">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Vai trò</label>
+                            <select name="role" class="form-select rounded-3">
+                                <option value="tenant">Khách thuê</option>
+                                <option value="owner">Chủ trọ</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold">
+                            Đăng ký
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <p class="mb-0 text-muted">Đã có tài khoản?
+                        <a href="#" class="text-primary fw-semibold text-decoration-none"
+                           data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Đăng nhập
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -267,38 +395,27 @@
                 <!-- Cột trái -->
                 <div class="col d-flex flex-column align-items-start text-start">
                     <p class="badge-tag">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
-                        </svg>
+                        <i class="bi bi-house"></i>
                         Nền tảng thuê phòng #1 Việt Nam
                     </p>
-
-                    <h1><b>Tìm phòng trọ <br>
-                            <span class="highlight">Nhanh Chóng</span> và <br>
-                            <span class="highlight">Minh Bạch</span>
-                        </b></h1>
-
+                    <h1 class="mt-3"><b>Tìm phòng trọ <br>
+                        <span class="highlight">Nhanh Chóng</span> và <br>
+                        <span class="highlight">Minh Bạch</span>
+                    </b></h1>
                     <p class="slogan">Hàng ngàn phòng trọ được xác minh, đánh giá thực từ khách thuê. Kết nối trực tiếp với chủ trọ uy tín.</p>
-
                     <div class="d-flex gap-2">
                         <button class="btn btn-dark ps-4 pe-4 p-2 rounded-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                            </svg>
+                            <i class="bi bi-search"></i>
                             <span class="m-2">Tìm phòng ngay</span>
                         </button>
                         <button class="btn btn-outline-secondary ps-4 pe-4 p-2 rounded-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
+                            <i class="bi bi-geo-alt"></i>
                             <span class="m-2">Xem bản đồ</span>
                         </button>
                     </div>
-
                     <ul class="stats-list">
                         <li>
-                            <p class="stats-number">5,000+</p>
+                            <p class="stats-number">{{ $availableCount }}+</p>
                             <p class="end-number">Phòng Trọ</p>
                         </li>
                         <li>
@@ -306,8 +423,8 @@
                             <p class="end-number">Người Thuê</p>
                         </li>
                         <li>
-                            <p class="stats-number">5,000+</p>
-                            <p class="end-number">Hài Lòng</p>
+                            <p class="stats-number">{{ $cityCount }}+</p>
+                            <p class="end-number">Thành Phố</p>
                         </li>
                     </ul>
                 </div>
@@ -318,9 +435,7 @@
                         <div class="box-2">
                             <div class="d-flex align-items-center gap-3">
                                 <div class="icon-wrap">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
+                                    <i class="bi bi-star-fill text-warning"></i>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <p class="a">4.8/5</p>
@@ -331,11 +446,7 @@
                         <div class="box">
                             <div class="d-flex align-items-center gap-3">
                                 <div class="icon-wrap">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        fill="#198754" class="bi bi-shield-check" viewBox="0 0 16 16">
-                                        <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
-                                        <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-                                    </svg>
+                                    <i class="bi bi-shield-check text-success fs-5"></i>
                                 </div>
                                 <div class="d-flex flex-column">
                                     <p class="a">Phòng đã xác minh</p>
@@ -343,149 +454,119 @@
                                 </div>
                             </div>
                         </div>
-
-                        <img class="nhato" src="{{ asset('storage/' .optional($product)->photo) }}" alt="">
+                        <img class="nhato" src="{{ asset('storage/' . optional($product)->photo) }}" alt="">
                     </div>
                 </div>
             </div>
 
             <!-- Thanh tìm kiếm -->
-            <div class="banner">
+            <div class="d-flex justify-content-center">
                 <div class="find">
-                    <div class="sleclect-group">
-                        <label for="ThanhPho">Thành Phố
-                            <select name="ThanhPho" id="ThanhPho">
-                                <option value="ThanhPho">Tất Cả Thành Phố </option>
-                                <option value="ThanhPho">Hồ Chí minh</option>
-                                <option value="ThanhPho">Hà Nội</option>
-                                <option value="ThanhPho">Thanh Hoá</option>
-                                <option value="ThanhPho">Nam Định</option>
-                            </select></label>
-                    </div>
-                    <div class="sleclect-group">
-                        <label for="Quan/Huyen">Quận / Huyện
-                            <select name="Quan/Huyen" id="">
-                                <option value="Quan/Huyen">Tất Cả Quận/Huyện</option>
-
-                            </select>
-                        </label>
-                    </div>
-                    <div class="sleclect-group">
-                        <label for="LoaiPhong">Loại Phòng
-                            <select name="LoaiPhong" id="">
-                                <option value="LoaiPhong">Tất Cả Loại Phòng </option>
-
-                            </select>
-                        </label>
-                    </div>
-                    <div class="sleclect-group">
-                        <label for="KhoangGia">Khoảng Giá
-                            <select name="KhoangGia" id="">
-                                <option value="KhoangGia">Tất Cả Giá </option>
-                            </select>
-                        </label>
-                    </div>
-                    <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg> tìm kiếm</button>
+                    <label>Thành Phố
+                        <select name="ThanhPho">
+                            <option>Tất Cả Thành Phố</option>
+                            <option>Hồ Chí Minh</option>
+                            <option>Hà Nội</option>
+                            <option>Cần Thơ</option>
+                            <option>Đà Nẵng</option>
+                        </select>
+                    </label>
+                    <label>Quận / Huyện
+                        <select name="Quan">
+                            <option>Tất Cả Quận/Huyện</option>
+                        </select>
+                    </label>
+                    <label>Loại Phòng
+                        <select name="LoaiPhong">
+                            <option>Tất Cả Loại Phòng</option>
+                        </select>
+                    </label>
+                    <label>Khoảng Giá
+                        <select name="KhoangGia">
+                            <option>Tất Cả Giá</option>
+                        </select>
+                    </label>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-search"></i> Tìm kiếm
+                    </button>
                 </div>
             </div>
 
-            <!-- Card -->
-
-            <div class="show">
-                <h1><b>Phòng trọ nổi bật</b></h1>
+            <!-- Phòng nổi bật -->
+            <div class="mt-5 pt-4">
+                <h2 class="fw-bold">Phòng trọ nổi bật</h2>
                 <p style="color: #6c757d;">Những phòng trọ được đánh giá cao và đang còn trống</p>
 
-                <div class="container mt-4 mb-5">
-                    <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start ">
-                        @foreach($products as $product)
-                        <div class="col ">
-                            <div class="card">
-                                <img src="{{ asset('storage/' . $product->photo) }}"
-                                    class="card-img-top"
-                                    style="height: 200px; object-fit: cover;"
-                                    alt="{{ $product->name }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <a style="text-decoration: none; color:black;" href="">
-                                            {{ $product->name }}
-                                        </a>
-                                    </h5>
-                                    <p class="card-text text-muted">
-                                        <small> {{ $product->address }}</small>
-                                    </p>
-                                    <p class="card-text text-success fw-bold">
-                                        {{ number_format($product->price) }} đ/tháng
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-2">
-                                        @foreach(explode(',', $product->description) as $item)
-                                        <span class="badge bg-light text-dark border">
-                                            @php $item = trim($item); @endphp
-                                            @if(str_contains($item, 'wifi'))
-                                            <i class="bi bi-wifi"></i>
-                                            @elseif(str_contains($item, 'máy lạnh'))
-                                            <i class="bi bi-snow"></i>
-                                            @elseif(str_contains($item, 'bảo vệ'))
-                                            <i class="bi bi-shield-check"></i>
-                                            @elseif(str_contains($item, 'gác'))
-                                            <i class="bi bi-house"></i>
-                                            @elseif(str_contains($item, 'chợ'))
-                                            <i class="bi bi-bag"></i>
-                                            @else
-                                            <i class="bi bi-check-circle"></i>
-                                            @endif
-                                            {{ $item }}
-                                        </span>
-                                        @endforeach {{-- ✅ endforeach description --}}
-                                    </div>
-
-                                    <!-- chủ trọ -->
-                                    <div class="mt-3 d-flex align-items-center justify-content-between border-top pt-2">
-
-                                        {{-- Chủ trọ --}}
-                                        <div class="d-flex align-items-center gap-2">
-                                            @if($product->user->avatar)
+                <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start mt-2">
+                    @foreach($products as $product)
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('storage/' . $product->photo) }}"
+                                class="card-img-top"
+                                style="height: 200px; object-fit: cover;"
+                                alt="{{ $product->name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="#">{{ $product->name }}</a>
+                                </h5>
+                                <p class="card-text text-muted">
+                                    <small><i class="bi bi-geo-alt"></i> {{ $product->address }}</small>
+                                </p>
+                                <p class="card-text text-success fw-bold">
+                                    {{ number_format($product->price) }} đ/tháng
+                                </p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach(explode(',', $product->description) as $item)
+                                    <span class="badge bg-light text-dark border">
+                                        @php $item = trim($item); @endphp
+                                        @if(str_contains($item, 'wifi')) <i class="bi bi-wifi"></i>
+                                        @elseif(str_contains($item, 'máy lạnh')) <i class="bi bi-snow"></i>
+                                        @elseif(str_contains($item, 'bảo vệ')) <i class="bi bi-shield-check"></i>
+                                        @elseif(str_contains($item, 'gác')) <i class="bi bi-house"></i>
+                                        @elseif(str_contains($item, 'chợ')) <i class="bi bi-bag"></i>
+                                        @else <i class="bi bi-check-circle"></i>
+                                        @endif
+                                        {{ $item }}
+                                    </span>
+                                    @endforeach
+                                </div>
+                                <div class="mt-3 d-flex align-items-center justify-content-between border-top pt-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        @if($product->user->avatar)
                                             <img src="{{ asset('storage/' . $product->user->avatar) }}"
-                                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
-                                                alt="{{ $product->user->name }}">
-                                            @else
+                                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                        @else
                                             <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
                                                 {{ strtoupper(substr($product->user->name, 0, 1)) }}
                                             </div>
-                                            @endif
-                                            <a style="text-decoration: none; color:black;" href="#" class="text-muted" style="font-size: 0.85rem;">{{ $product->user->name }}</a>
-                                        </div>
-
-                                        <div class="d-flex align-items-center gap-1 text-danger">
-                                            <i class="bi bi-heart-fill"></i>
-                                            <span style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
-                                        </div>
-
+                                        @endif
+                                        <span style="font-size: 0.85rem;">{{ $product->user->name }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1 text-danger">
+                                        <i class="bi bi-heart-fill"></i>
+                                        <span style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
-            <!-- map -->
-            <div class="map text-center">
-                <h1><b>phòng trọ trên bản đồ</b></h1>
-                <p style="color: #6c757d;">Xem vị trí các phòng trọ trên bản đồ để chọn chỗ ở thuận tiện nhất cho bạn</p>
 
-                <div class="box-map" style="position: relative; display: inline-block; width: 100%; margin-top: 50px;">
+            <!-- Bản đồ -->
+            <div class="mt-5 pt-5 text-center">
+                <h2 class="fw-bold">Phòng trọ trên bản đồ</h2>
+                <p style="color: #6c757d;">Xem vị trí các phòng trọ trên bản đồ để chọn chỗ ở thuận tiện nhất</p>
 
-                    <img class="map-size"
-                        src="{{ asset('storage/' . optional($product)->photo) }}"
-                        alt=""
-                        style="width: 100%; border-radius: 20px; display: block;">
+                <div style="position: relative; width: 100%; margin-top: 30px;">
+                    <img src="{{ asset('storage/' . optional($product)->photo) }}"
+                         alt=""
+                         style="width: 100%; border-radius: 20px; display: block; height: 350px; object-fit: cover;">
 
-                    {{-- Box nằm đè lên ảnh --}}
-                    <div class="d-flex align-items-center gap-3 bg-white px-3 rounded-4 shadow"
+                    <div class="d-flex align-items-center gap-3 bg-white px-4 py-3 rounded-4 shadow"
                         style="position: absolute; bottom: 16px; left: 16px; z-index: 10;">
-                        <ul class="stats-list">
+                        <ul class="stats-list mb-0" style="margin-top: 0;">
                             <li>
                                 <p class="stats-number">{{ $availableCount }}</p>
                                 <p class="end-number">Phòng Trống</p>
@@ -496,142 +577,115 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </div>
-            <!-- đánh giá nổi bật -->
 
-            <div style="margin-top: 150px;" class="comment text-center">
-                <h1><b>Khách hàng nói gì về chúng tôi</b></h1>
+            <!-- Đánh giá -->
+            <div class="mt-5 pt-5 text-center">
+                <h2 class="fw-bold">Khách hàng nói gì về chúng tôi</h2>
                 <p style="color: #6c757d;">Những đánh giá thực tế từ người đã tìm được phòng trọ ưng ý</p>
 
-                <div class="container mt-4 mb-5">
-                    <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start">
-                        @foreach($comments as $comment)
-                        <div class="col">
-                            <div class="card rounded-4 p-2">
-
-
-                                <div class="card-body text-start">
-                                    {{-- Rating --}}
-                                    <div class="d-flex align-items-center gap-1 text-warning">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <=$comment->rating)
-                                            <i class="bi bi-star-fill"></i>
-                                            @else
-                                            <i class="bi bi-star"></i>
-                                            @endif
-                                            @endfor
-                                    </div>
-                                    {{-- Nội dung comment --}}
-                                    <p class="mb-3">{{ $comment->content }}</p>
-
-                                    {{-- Người dùng --}}
-                                    <div class="d-flex align-items-center justify-content-between border-top pt-2">
-                                        <div class="d-flex align-items-center gap-2">
-                                            @if($comment->user->avatar)
-                                            <img src="{{ asset('storage/' . $comment->user->avatar) }}"
-                                                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
-                                                alt="{{ $comment->user->name }}">
-                                            @else
-                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
-                                                {{ strtoupper(substr($comment->user->name, 0, 1)) }}
-                                            </div>
-                                            @endif
-                                            <span style="font-size: 0.85rem;">{{ $comment->user->name }}</span>
+                <div class="row row-cols-1 row-cols-md-3 g-4 align-items-start mt-2">
+                    @foreach($comments as $comment)
+                    <div class="col">
+                        <div class="card rounded-4 p-2">
+                            <div class="card-body text-start">
+                                <div class="d-flex align-items-center gap-1 text-warning mb-2">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <i class="bi bi-star{{ $i <= $comment->rating ? '-fill' : '' }}"></i>
+                                    @endfor
+                                </div>
+                                <p class="mb-3">{{ $comment->content }}</p>
+                                <div class="d-flex align-items-center gap-2 border-top pt-2">
+                                    @if($comment->user->avatar)
+                                        <img src="{{ asset('storage/' . $comment->user->avatar) }}"
+                                            style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                                    @else
+                                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">
+                                            {{ strtoupper(substr($comment->user->name, 0, 1)) }}
                                         </div>
-
-
-                                    </div>
+                                    @endif
+                                    <span style="font-size: 0.85rem;">{{ $comment->user->name }}</span>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
 
-            <!--temper  -->
-
-            <div class="box-map" style="position: relative; width: 100%; max-width: 1000px; margin: 50px auto 0; color: #dcdfe1;">
-
-                <img class="map-size"
-                    src="{{ asset($settings['banner_image']) }}"
-                    alt=""
-                    style="width: 100%; border-radius: 20px; display: block; height: 300px; object-fit: cover;">
-
-                {{-- Lớp tối đè lên ảnh --}}
+            <!-- Banner cho thuê -->
+            <div style="position: relative; width: 100%; max-width: 1000px; margin: 80px auto 0;">
+                <img src="{{ asset($settings['banner_image'] ?? 'images/default.jpg') }}"
+                     alt=""
+                     style="width: 100%; border-radius: 20px; display: block; height: 300px; object-fit: cover;">
                 <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 20px; z-index: 5;"></div>
-
-                {{-- Nội dung căn giữa ảnh --}}
-                <div class="d-flex flex-column align-items-center justify-content-center text-center"
+                <div class="d-flex flex-column align-items-center justify-content-center text-center text-white"
                     style="position: absolute; inset: 0; z-index: 10; padding: 20px;">
-
-                    <h1 class="fw-bold mb-2">Bạn có phòng cho thuê?</h1>
-                    <p class="mb-4">Đăng tin ngay để tiếp cận hàng ngàn khách hàng tiềm năng. <br>
+                    <h2 class="fw-bold mb-2">Bạn có phòng cho thuê?</h2>
+                    <p class="mb-4">Đăng tin ngay để tiếp cận hàng ngàn khách hàng tiềm năng.<br>
                         Đơn giản, nhanh gọn và hoàn toàn miễn phí.</p>
-
                     <div class="d-flex gap-3">
-                        <button class="btn btn-light">Đăng phòng ngay</button>
+                        @auth
+                            @if(auth()->user()->role === 'owner')
+                                <a href="{{ route('owner.products.create') }}" class="btn btn-light fw-bold">
+                                    Đăng phòng ngay
+                                </a>
+                            @else
+                                <button class="btn btn-light fw-bold">Đăng phòng ngay</button>
+                            @endif
+                        @else
+                            <button class="btn btn-light fw-bold"
+                                    data-bs-toggle="modal" data-bs-target="#registerModal">
+                                Đăng phòng ngay
+                            </button>
+                        @endauth
                         <button class="btn btn-outline-light">Tìm hiểu thêm</button>
                     </div>
                 </div>
             </div>
-    </header>
-   <footer style="margin-top: 100px; width: 100%; background-color: rgb(30, 41, 59); color: rgb(194, 194, 194);">
-    <div class=" pt-4 pb-4 px-5">
-        <div class="row gx-5 pt-5">
-
-            <!-- Logo & Mô tả -->
-            <div class="col-md-3 mb-4">
-                <a class="navbar-brand fs-4" href="#">TroPlus</a>
-                <p class="mt-3 text-secondary" style="font-size: 0.9em;">
-                    Nền tảng tìm kiếm và cho thuê phòng trọ hàng đầu Việt Nam. <br>
-                    Kết nối người thuê và chủ trọ một cách nhanh chóng, minh bạch.
-                </p>
-            </div>
-
-            <!-- Liên kết nhanh -->
-            <div class="col-md-3 mb-4">
-                <h6 class=" mb-3">LIÊN KẾT NHANH</h6>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Trang chủ</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Tìm phòng</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Bản đồ phòng trọ</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Phòng nổi bật</a>
-            </div>
-
-            <!-- Dành cho chủ trọ -->
-            <div class="col-md-3 mb-4">
-                <h6 class=" mb-3">DÀNH CHO CHỦ TRỌ</h6>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Đăng phòng cho thuê</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Quản lý đăng bài</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Hướng dẫn sử dụng</a>
-                <a class="d-block text-secondary text-decoration-none mb-2" href="#">Chính sách và quy định</a>
-            </div>
-
-            <!-- Liên hệ -->
-            <div class="col-md-3 mb-4">
-                <h6 class=" mb-3">LIÊN HỆ</h6>
-                <p class="text-secondary mb-2">
-                    <i class="bi bi-geo-alt me-2"></i>123 Nguyễn Anh Minh
-                </p>
-                <p class="text-secondary mb-2">
-                    <i class="bi bi-telephone me-2"></i>1900 12345
-                </p>
-                <p class="text-secondary mb-2">
-                    <i class="bi bi-envelope me-2"></i>nguyenanhminh@troplus.vn
-                </p>
-            </div>
 
         </div>
+    </header>
 
-        <!-- Đường kẻ & Copyright -->
-        <hr style="border-color: #333;">
-        <p class="text-center text-secondary mb-0" style="font-size: 0.85em;">
-            © 2026 TroPlus. All rights reserved.
-        </p>
-    </div>
-</footer>
+    <!-- Footer -->
+    <footer style="margin-top: 100px; width: 100%; background-color: rgb(30, 41, 59); color: rgb(194, 194, 194);">
+        <div class="pt-4 pb-4 px-5">
+            <div class="row gx-5 pt-5">
+                <div class="col-md-3 mb-4">
+                    <a class="navbar-brand text-white fw-bold fs-4" href="/">TroPlus</a>
+                    <p class="mt-3 text-secondary" style="font-size: 0.9em;">
+                        Nền tảng tìm kiếm và cho thuê phòng trọ hàng đầu Việt Nam.<br>
+                        Kết nối người thuê và chủ trọ một cách nhanh chóng, minh bạch.
+                    </p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">LIÊN KẾT NHANH</h6>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Trang chủ</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Tìm phòng</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Bản đồ phòng trọ</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Phòng nổi bật</a>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">DÀNH CHO CHỦ TRỌ</h6>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Đăng phòng cho thuê</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Quản lý đăng bài</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Hướng dẫn sử dụng</a>
+                    <a class="d-block text-secondary text-decoration-none mb-2" href="#">Chính sách và quy định</a>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">LIÊN HỆ</h6>
+                    <p class="text-secondary mb-2"><i class="bi bi-geo-alt me-2"></i>123 Nguyễn Anh Minh</p>
+                    <p class="text-secondary mb-2"><i class="bi bi-telephone me-2"></i>1900 12345</p>
+                    <p class="text-secondary mb-2"><i class="bi bi-envelope me-2"></i>nguyenanhminh@troplus.vn</p>
+                </div>
+            </div>
+            <hr style="border-color: #333;">
+            <p class="text-center text-secondary mb-0" style="font-size: 0.85em;">
+                © 2026 TroPlus. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
 </body>
-
 </html>
