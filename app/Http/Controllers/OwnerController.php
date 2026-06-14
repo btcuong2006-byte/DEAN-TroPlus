@@ -12,6 +12,7 @@ class OwnerController extends Controller
     // ✅ Tổng quan
     public function dashboard()
     {
+        $userId = auth()->id();
         $totalProducts     = Product::where('user_id', auth()->id())->count();
         $availableProducts = Product::where('user_id', auth()->id())
                                     ->where('status', 'available')->count();
@@ -51,20 +52,24 @@ class OwnerController extends Controller
     // ✅ Form đăng phòng
     public function create()
     {
-        return view('owner.create');
+        $categories = \App\Models\Category::all();
+        return view('owner.create', compact('categories'));
     }
 
     // ✅ Lưu phòng mới
     public function store(Request $request)
     {
-
         $request->validate([
             'name'        => 'required',
             'price'       => 'required|numeric',
             'address'     => 'required',
+            'city'        => 'required',
             'acreage'     => 'required|numeric',
             'description' => 'required',
             'photo'       => 'nullable|image|max:2048',
+            'lat'         => 'nullable|numeric',
+            'lng'         => 'nullable|numeric',
+            'categories'  => 'nullable|array',
         ]);
 
         $photoName = null;
@@ -74,29 +79,35 @@ class OwnerController extends Controller
             $request->photo->storeAs('products', $photoName, 'public');
         }
 
-        Product::create([
-       
-            'user_id'     => 1 ,  // auth()->id()
+        $product = Product::create([
+            'user_id'     => auth()->id(),
             'name'        => $request->name,
             'price'       => $request->price,
             'address'     => $request->address,
+            'city'        => $request->city,
             'acreage'     => $request->acreage,
             'description' => $request->description,
             'photo'       => $photoName ? 'products/' . $photoName : null,
             'status'      => 'available',
+            'lat'         => $request->lat ?? 10.0452,
+            'lng'         => $request->lng ?? 105.7469,
         ]);
+
+        if ($request->categories) {
+            $product->categories()->sync($request->categories);
+        }
 
         return redirect()->route('owner.products')
                          ->with('success', 'Đăng phòng thành công!');
     }
 
-    // ✅ Form sửa phòng
     public function edit($id)
     {
         $product = Product::where('user_id', auth()->id())
                           ->findOrFail($id);
+        $categories = \App\Models\Category::all();
 
-        return view('owner.edit', compact('product'));
+        return view('owner.edit', compact('product', 'categories'));
     }
 
     // ✅ Cập nhật phòng
@@ -109,9 +120,13 @@ class OwnerController extends Controller
             'name'        => 'required',
             'price'       => 'required|numeric',
             'address'     => 'required',
+            'city'        => 'required',
             'acreage'     => 'required|numeric',
             'description' => 'required',
             'photo'       => 'nullable|image|max:2048',
+            'lat'         => 'nullable|numeric',
+            'lng'         => 'nullable|numeric',
+            'categories'  => 'nullable|array',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -124,10 +139,19 @@ class OwnerController extends Controller
             'name'        => $request->name,
             'price'       => $request->price,
             'address'     => $request->address,
+            'city'        => $request->city,
             'acreage'     => $request->acreage,
             'description' => $request->description,
             'status'      => $request->status ?? $product->status,
+            'lat'         => $request->lat ?? $product->lat,
+            'lng'         => $request->lng ?? $product->lng,
         ]);
+
+        if ($request->categories) {
+            $product->categories()->sync($request->categories);
+        } else {
+            $product->categories()->detach();
+        }
 
         return redirect()->route('owner.products')
                          ->with('success', 'Cập nhật thành công!');
@@ -155,11 +179,55 @@ class OwnerController extends Controller
         $pendingCount  = $comments->where('is_approved', false)->count();
         $approvedCount = $comments->where('is_approved', true)->count();
 
+        // Lấy thêm dữ liệu cho tính năng đánh giá người thuê
+        $tenants       = User::where('role', 'tenant')->get();
+        $myProducts    = Product::where('user_id', auth()->id())->get();
+        $tenantReviews = \App\Models\TenantReview::with('tenant', 'product')
+                                                 ->where('owner_id', auth()->id())
+                                                 ->latest()->get();
+
         return view('owner.comments', compact(
             'comments',
             'totalComments',
             'pendingCount',
-            'approvedCount'
+            'approvedCount',
+            'tenants',
+            'myProducts',
+            'tenantReviews'
         ));
+    }
+
+    /**
+     * Store a review for a tenant (renter)
+     */
+    public function storeTenantReview(Request $request)
+    {
+        $request->validate([
+            'tenant_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000',
+        ]);
+
+        \App\Models\TenantReview::create([
+            'owner_id' => auth()->id(),
+            'tenant_id' => $request->tenant_id,
+            'product_id' => $request->product_id,
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+
+        // Recalculate tenant reputation_score
+        $tenant = User::findOrFail($request->tenant_id);
+        $reviews = \App\Models\TenantReview::where('tenant_id', $tenant->id)->get();
+        $totalReviews = $reviews->count();
+        $averageRating = $reviews->avg('rating');
+
+        $tenant->update([
+            'reputation_score' => round($averageRating, 1),
+            'total_reviews' => $totalReviews,
+        ]);
+
+        return back()->with('success', 'Đánh giá người thuê thành công! Điểm uy tín của họ đã được cập nhật.');
     }
 }

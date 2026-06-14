@@ -155,6 +155,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.upgrades*') ? 'active' : '' }}"
+                                href="{{ route('admin.upgrades') }}">
+                                <i class="bi bi-person-up"></i> Yêu cầu nâng cấp
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.settings*') ? 'active' : '' }}"
                                 href="{{ route('admin.settings') }}">
                                 <i class="bi bi-gear"></i> Cài đặt

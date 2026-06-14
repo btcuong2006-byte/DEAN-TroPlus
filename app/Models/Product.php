@@ -11,27 +11,19 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-
         'user_id',
-
         'name',
-
         'price',
-
         'address',
         'city',
-
         'acreage',
-
         'description',
-
         'photo',
-
         'status',
-
         'favorite_count',
+        'lat',
+        'lng', // ✅ thêm
     ];
-
     /**
      * Người đăng phòng
      */
