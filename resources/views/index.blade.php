@@ -232,10 +232,26 @@
                                         @endif
                                         <span style="font-size: 0.85rem;">{{ $product->user->name }}</span>
                                     </div>
-                                    <div class="d-flex align-items-center gap-1 text-danger">
-                                        <i class="bi bi-heart-fill"></i>
-                                        <span style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
-                                    </div>
+                                    @auth
+                                        @php
+                                            $isFavorited = \DB::table('favorites')
+                                                ->where('user_id', auth()->id())
+                                                ->where('product_id', $product->id)
+                                                ->exists();
+                                        @endphp
+                                        <form action="{{ route('products.favorite', $product->id) }}" method="POST" class="favorite-form d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-link text-danger p-0 border-0 d-flex align-items-center gap-1 text-decoration-none favorite-btn" style="box-shadow: none;">
+                                                <i class="bi bi-heart{{ $isFavorited ? '-fill' : '' }}"></i>
+                                                <span class="favorite-count" style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button class="btn btn-link text-danger p-0 border-0 d-flex align-items-center gap-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal" style="box-shadow: none;">
+                                            <i class="bi bi-heart"></i>
+                                            <span style="font-size: 0.85rem;">{{ $product->favorite_count }}</span>
+                                        </button>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -388,6 +404,39 @@
                     <div style="color:#6c757d; font-size:12px; margin-top:4px;">👤 ${p.user}</div>
                 </div>
             `);
+        });
+
+        // Xử lý lưu yêu thích bằng AJAX
+        document.querySelectorAll('.favorite-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const action = this.getAttribute('action');
+                const btn = this.querySelector('.favorite-btn');
+                const icon = btn.querySelector('i');
+                const countSpan = btn.querySelector('.favorite-count');
+
+                fetch(action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.action === 'added') {
+                            icon.classList.remove('bi-heart');
+                            icon.classList.add('bi-heart-fill');
+                        } else {
+                            icon.classList.remove('bi-heart-fill');
+                            icon.classList.add('bi-heart');
+                        }
+                        countSpan.textContent = data.favorite_count;
+                    }
+                })
+                .catch(err => console.error(err));
+            });
         });
     </script>
 

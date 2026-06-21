@@ -269,10 +269,26 @@
                                             @endif
                                             <span style="font-size: 0.8rem;">{{ $product->user->name }}</span>
                                         </div>
-                                        <div class="d-flex align-items-center gap-1 text-danger">
-                                            <i class="bi bi-heart-fill" style="font-size: 0.8rem;"></i>
-                                            <span style="font-size: 0.8rem;">{{ $product->favorite_count }}</span>
-                                        </div>
+                                        @auth
+                                            @php
+                                                $isFavorited = \DB::table('favorites')
+                                                    ->where('user_id', auth()->id())
+                                                    ->where('product_id', $product->id)
+                                                    ->exists();
+                                            @endphp
+                                            <form action="{{ route('products.favorite', $product->id) }}" method="POST" class="favorite-form d-inline">
+                                                @csrf
+                                                <button type="submit" class="btn btn-link text-danger p-0 border-0 d-flex align-items-center gap-1 text-decoration-none favorite-btn" style="box-shadow: none;">
+                                                    <i class="bi bi-heart{{ $isFavorited ? '-fill' : '' }}" style="font-size: 0.8rem;"></i>
+                                                    <span class="favorite-count" style="font-size: 0.8rem;">{{ $product->favorite_count }}</span>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('login') }}" class="btn btn-link text-danger p-0 border-0 d-flex align-items-center gap-1 text-decoration-none" style="box-shadow: none;">
+                                                <i class="bi bi-heart" style="font-size: 0.8rem;"></i>
+                                                <span style="font-size: 0.8rem;">{{ $product->favorite_count }}</span>
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>
@@ -299,5 +315,40 @@
 
         </div>
     </div>
+
+    <script>
+        // Xử lý lưu yêu thích bằng AJAX
+        document.querySelectorAll('.favorite-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const action = this.getAttribute('action');
+                const btn = this.querySelector('.favorite-btn');
+                const icon = btn.querySelector('i');
+                const countSpan = btn.querySelector('.favorite-count');
+
+                fetch(action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.action === 'added') {
+                            icon.classList.remove('bi-heart');
+                            icon.classList.add('bi-heart-fill');
+                        } else {
+                            icon.classList.remove('bi-heart-fill');
+                            icon.classList.add('bi-heart');
+                        }
+                        countSpan.textContent = data.favorite_count;
+                    }
+                })
+                .catch(err => console.error(err));
+            });
+        });
+    </script>
 </body>
 </html>
