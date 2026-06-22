@@ -137,17 +137,7 @@
                         @foreach(explode(',', $product->description) as $item)
                             @php $item = trim($item); @endphp
                             @if($item)
-                                <span class="badge bg-light text-dark border badge-tag">
-                                    @if(str_contains(Str::lower($item), 'wifi')) <i class="bi bi-wifi text-primary me-1"></i>
-                                    @elseif(str_contains(Str::lower($item), 'máy lạnh') || str_contains(Str::lower($item), 'điều hòa')) <i class="bi bi-snow text-info me-1"></i>
-                                    @elseif(str_contains(Str::lower($item), 'bảo vệ') || str_contains(Str::lower($item), 'an ninh')) <i class="bi bi-shield-check text-success me-1"></i>
-                                    @elseif(str_contains(Str::lower($item), 'gác')) <i class="bi bi-house text-warning me-1"></i>
-                                    @elseif(str_contains(Str::lower($item), 'tủ lạnh')) <i class="bi bi-cup-hot text-info me-1"></i>
-                                    @elseif(str_contains(Str::lower($item), 'máy giặt')) <i class="bi bi-water text-primary me-1"></i>
-                                    @else <i class="bi bi-check-circle text-muted me-1"></i>
-                                    @endif
-                                    {{ $item }}
-                                </span>
+                                <x-amenity-tag :name="$item" class="badge-tag" />
                             @endif
                         @endforeach
                     </div>

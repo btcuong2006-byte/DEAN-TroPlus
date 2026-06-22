@@ -207,17 +207,7 @@
                                 </p>
                                 <div class="d-flex flex-wrap gap-2">
                                     @foreach(explode(',', $product->description) as $item)
-                                    <span class="badge bg-light text-dark border">
-                                        @php $item = trim($item); @endphp
-                                        @if(str_contains($item, 'wifi')) <i class="bi bi-wifi"></i>
-                                        @elseif(str_contains($item, 'máy lạnh')) <i class="bi bi-snow"></i>
-                                        @elseif(str_contains($item, 'bảo vệ')) <i class="bi bi-shield-check"></i>
-                                        @elseif(str_contains($item, 'gác')) <i class="bi bi-house"></i>
-                                        @elseif(str_contains($item, 'chợ')) <i class="bi bi-bag"></i>
-                                        @else <i class="bi bi-check-circle"></i>
-                                        @endif
-                                        {{ $item }}
-                                    </span>
+                                        <x-amenity-tag :name="$item" style="font-size: 0.75rem;" />
                                     @endforeach
                                 </div>
                                 <div class="mt-3 d-flex align-items-center justify-content-between border-top pt-2">

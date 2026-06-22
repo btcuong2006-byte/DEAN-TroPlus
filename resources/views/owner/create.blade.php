@@ -73,9 +73,19 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label class="form-label fw-semibold">Mô tả tiện ích (Phân cách bằng dấu phẩy)</label>
+                    <label class="form-label fw-semibold">Mô tả tiện ích & Đặc điểm (Phân cách bằng dấu phẩy)</label>
                     <textarea name="description" class="form-control rounded-3" rows="3"
-                              placeholder="VD: Wifi miễn phí, máy lạnh, bảo vệ 24/7, có gác lửng">{{ old('description') }}</textarea>
+                              placeholder="VD: Wifi, Máy lạnh, Giờ giấc tự do, Toilet riêng">{{ old('description') }}</textarea>
+                    
+                    <div class="mt-2" style="font-size: 0.85rem; color: #5f6368; line-height: 1.6;">
+                        <span class="d-block mb-1">
+                            <i class="bi bi-lightbulb text-warning me-1"></i>
+                            <strong>Mẫu ghi tiện ích để hiển thị biểu tượng (icon) tự động:</strong>
+                        </span>
+                        <div class="lh-lg">
+                            Nhập các từ khóa phân cách bởi dấu phẩy, ví dụ: <code>wifi, máy lạnh, tủ lạnh, máy giặt, gác lửng, bảo vệ, tự do, nhà xe, vệ sinh riêng, bếp nấu ăn, ban công</code>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-12">
@@ -146,5 +156,7 @@
                     }
                 });
         });
+
+
     </script>
 </x-layouts.owner>

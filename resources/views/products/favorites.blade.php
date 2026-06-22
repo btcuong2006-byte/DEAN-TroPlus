@@ -85,9 +85,7 @@
                                     @foreach(explode(',', $product->description) as $item)
                                         @php $item = trim($item); @endphp
                                         @if($item)
-                                            <span class="badge bg-light text-dark border" style="font-size: 0.75rem;">
-                                                {{ $item }}
-                                            </span>
+                                            <x-amenity-tag :name="$item" style="font-size: 0.75rem;" />
                                         @endif
                                     @endforeach
                                 </div>
